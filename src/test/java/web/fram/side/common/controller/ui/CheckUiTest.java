@@ -1,4 +1,4 @@
-package web.fram.side.common.ui;
+package web.fram.side.common.controller.ui;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
