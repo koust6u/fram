@@ -30,3 +30,11 @@ jobs:
       - name: Fetch sensitive file from secure submodule
         run: |
           cp ./secret/config/application.yml ./src/main/resources/application.yml
+      - name: Grant Execute Permission For Gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+
+      - name: Running Test Code
+        run: ./gradlew --info test
