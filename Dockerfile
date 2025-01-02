@@ -1,7 +1,7 @@
 FROM amazoncorretto:17
 
-ARG JAR_FILE=build/libs/fram-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} /fram.jar
+ARG JAR_FILE=build/libs/side-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} /side.jar
 
 ARG PROFILE
 ENV PROFILE_ENV=${PROFILE}
