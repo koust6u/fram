@@ -1,4 +1,0 @@
-[submodule "project/submodule-config"]
-	path = secret/submodule-config
-	url = https://github.com/koust6u/secret
-	branch = dev
