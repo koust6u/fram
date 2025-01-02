@@ -1,4 +1,4 @@
-package web.fram.side.api;
+package web.fram.side.common.api;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;

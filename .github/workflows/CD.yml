@@ -39,6 +39,12 @@ jobs:
           docker build --build-arg DEPENDENCY=build/dependency -t ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest --platform linux/arm64 .
           docker push ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest
 
+      - name: Upload docker-compose yaml script to artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-compose
+          path: ${{ github.workspace }}/backend/be_app-docker-compose.yml
+
   deploy:
     runs-on: ${{ matrix.instance }}
     needs: build
