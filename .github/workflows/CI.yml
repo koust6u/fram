@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4.2.2
         with:
           submodules: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACTION_TOKEN }}
 
       - name: Set up JDK17
         uses: actions/setup-java@v4.6.0
@@ -29,5 +29,12 @@ jobs:
           git submodule update --init --recursive --depth 2
       - name: Fetch sensitive file from secure submodule
         run: |
-          ls -al | cat 
-          cat secret/
+          cp ./secret/config/application.yml ./src/main/resources/application.yml
+      - name: Grant Execute Permission For Gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+
+      - name: Running Test Code
+        run: ./gradlew --info test
