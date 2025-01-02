@@ -45,4 +45,4 @@ jobs:
       - name: Image build and push
         run: |
           docker build --build-arg DEPENDENCY=build/dependency -t ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest --platform linux/arm64 .
-          docker push ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:test-latest
+          docker push ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest
