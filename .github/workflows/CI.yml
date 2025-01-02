@@ -1,8 +1,11 @@
 name: CI
 
-on: 
+on:
   pull_request:
     branches: ["main", "dev"]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -12,14 +15,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
-          submodules: true 
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK17
         uses: actions/setup-java@v4.6.0
         with:
           java-version: 17
           distribution: corretto
-          
+
       - name: Clone secure submodule
         run: |
-          git submodule update --init --recursive --depth 1
+          git submodule update --init --recursive --depth 2
+      - name: Fetch sensitive file from secure submodule
+        run: |
+          ls -al | cat 
+          cat secret/
