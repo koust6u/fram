@@ -37,5 +37,4 @@ out/
 .vscode/
 
 ### 서브 모듈 ###
-secret/
 src/main/resources/*.yml
