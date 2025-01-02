@@ -45,7 +45,6 @@ jobs:
           name: docker-compose
           path: ${{ github.workspace }}/secret/config/app-docker-compose.yml
 
-
   deploy:
     runs-on: ${{ matrix.instance }}
     needs: build
@@ -66,8 +65,8 @@ jobs:
 
       - name: Stop and remove the old environment
         run: |
-          sudo docker-compose --env-file ${{ secrets.DOCKER_COMPOSE_YAML_PATH }} -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} down
+          sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} down
 
       - name: Start the new environment
         run: |
-          sudo docker-compose --env-file ${{ secrets.DOCKER_COMPOSE_YAML_PATH }} -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} up -d
+          sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} up -d
