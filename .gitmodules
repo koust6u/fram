@@ -1,0 +1,3 @@
+[submodule "secret/config"]
+	path = secret/config
+	url = https://github.com/koust6u/secret
