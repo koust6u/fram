@@ -62,7 +62,7 @@ jobs:
 
       - name: Move docker-compose YAML
         run: |
-          sudo mv app-docker-compose.yml ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/
+          sudo cp app-docker-compose.yml ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/
 
       - name: Stop and remove the old environment
         run: |
