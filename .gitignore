@@ -38,3 +38,4 @@ out/
 
 ### 서브 모듈 ###
 src/main/resources/*.yml
+secret/
