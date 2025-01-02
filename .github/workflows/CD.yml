@@ -60,8 +60,9 @@ jobs:
           name: docker-compose
           path: ${{ github.workspace }}
 
-      - name: Move docker-compose YAML
+      - name: Cope docker-compose YAML
         run: |
+          sudo rm -f app-docker-compose.yml
           sudo cp app-docker-compose.yml ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/
 
       - name: Stop and remove the old environment
