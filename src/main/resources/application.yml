@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: side
+
+springdoc:
+  swagger-ui:
+    persist-authorization: true
+    path: /api/docs
