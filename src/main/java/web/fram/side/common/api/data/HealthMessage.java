@@ -1,4 +1,4 @@
-package web.fram.side.api.data;
+package web.fram.side.common.api.data;
 
 import java.time.LocalDateTime;
 
