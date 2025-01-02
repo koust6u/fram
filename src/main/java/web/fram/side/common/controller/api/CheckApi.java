@@ -1,4 +1,4 @@
-package web.fram.side.common.api;
+package web.fram.side.common.controller.api;
 
 import java.time.LocalDateTime;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import web.fram.side.common.api.data.HealthMessage;
-import web.fram.side.common.api.docs.CheckApiDocs;
+import web.fram.side.common.controller.api.data.HealthMessage;
+import web.fram.side.common.controller.api.docs.CheckApiDocs;
 
 @RestController
 @RequestMapping("/api")
