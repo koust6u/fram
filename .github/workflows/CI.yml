@@ -4,9 +4,6 @@ on:
   pull_request:
     branches: ["main", "dev"]
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,3 +35,9 @@ jobs:
 
       - name: Running Test Code
         run: ./gradlew --info test
+
+      - name: Image build and push
+        run: |
+          docker login -u ${{ secrets.DOCKER_HUB_ID }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          docker build --build-arg DEPENDENCY=build/dependency -t ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest --platform linux/arm64 .
+          docker push ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest
