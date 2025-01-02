@@ -30,6 +30,7 @@ jobs:
       - name: Clone secure submodule
         run: |
           git submodule update --init --recursive --depth 2
+
       - name: Fetch sensitive file from secure submodule
         run: |
           cp ./secret/config/application.yml ./src/main/resources/application.yml
