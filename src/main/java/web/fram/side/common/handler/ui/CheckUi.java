@@ -1,4 +1,4 @@
-package web.fram.side.common.controller.ui;
+package web.fram.side.common.handler.ui;
 
 import java.time.LocalDateTime;
 
