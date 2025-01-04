@@ -29,4 +29,8 @@ public interface ArticleApiDocs {
     @Operation(summary = "작성글 수정")
     @ApiResponse(responseCode = "204 NO CONTENT", description = "작성글 수정 성공")
     ResponseEntity<Void> modify(long id, ArticleModifyWebRequest request);
+
+    @Operation(summary = "작성글 삭제")
+    @ApiResponse(responseCode = "204 NO CONTENT", description = "작성글 삭제 성공")
+    ResponseEntity<Void> delete(long id);
 }
