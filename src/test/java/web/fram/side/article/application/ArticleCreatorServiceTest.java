@@ -1,4 +1,4 @@
-package web.fram.side.article.service;
+package web.fram.side.article.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,11 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import web.dummy.ArticleDummies;
+import web.fram.side.article.application.data.request.ArticleCreateAppRequest;
 import web.fram.side.article.domain.repository.ArticleRepository;
-import web.fram.side.article.service.data.request.ArticleCreateServiceRequest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
-class ArticleCreateServiceTest {
+class ArticleCreatorServiceTest {
 
     @Autowired
     private ArticleCreateService articleCreateService;
@@ -31,7 +31,7 @@ class ArticleCreateServiceTest {
     @DisplayName("작성글을 생성한다.")
     void create_article() {
         // given
-        final ArticleCreateServiceRequest request = ArticleDummies.articleCreateServiceRequest();
+        final ArticleCreateAppRequest request = ArticleDummies.articleCreateServiceRequest();
 
         // when
         long id = articleCreateService.create(request);

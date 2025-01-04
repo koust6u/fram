@@ -1,4 +1,4 @@
-package web.fram.side.article.service;
+package web.fram.side.article.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,9 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import web.dummy.ArticleDummies;
+import web.fram.side.article.application.data.response.ArticleSearchServiceResponse;
 import web.fram.side.article.domain.Article;
 import web.fram.side.article.domain.repository.ArticleRepository;
-import web.fram.side.article.service.data.response.ArticleSearchServiceResponse;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 class ArticleSearchServiceTest {
@@ -44,7 +44,7 @@ class ArticleSearchServiceTest {
 
         // then
         final ArticleSearchServiceResponse expected = new ArticleSearchServiceResponse
-                (article.getId(), article.getTitle(), article.getAuthor(), article.getDesc());
+                (article.getId(), article.getTitleAsString(), article.getAuthor(), article.getContentAsString());
         assertThat(response).isEqualTo(expected);
     }
 

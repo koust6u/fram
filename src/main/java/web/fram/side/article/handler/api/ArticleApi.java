@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import web.fram.side.article.application.ArticleCreateService;
+import web.fram.side.article.application.ArticleSearchService;
+import web.fram.side.article.application.data.response.ArticleSearchServiceResponse;
 import web.fram.side.article.handler.api.data.request.ArticleCreateWebRequest;
 import web.fram.side.article.handler.api.data.response.ArticleSearchWebResponse;
 import web.fram.side.article.handler.api.docs.ArticleApiDocs;
-import web.fram.side.article.service.ArticleCreateService;
-import web.fram.side.article.service.ArticleSearchService;
-import web.fram.side.article.service.data.response.ArticleSearchServiceResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class ArticleApi implements ArticleApiDocs {
 
     @PostMapping("/article")
     public ResponseEntity<Void> createArticle(@Valid @RequestBody final ArticleCreateWebRequest request) {
-        final long createId = articleCreateService.create(request.toServiceRequest());
+        final long createId = articleCreateService.create(request.toAppRequest());
 
         return ResponseEntity.created(URI.create("/article/" + createId))
                 .build();

@@ -1,6 +1,7 @@
 package web.fram.side.article.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,18 +22,28 @@ public class Article extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Embedded
     @Column(name = "TITLE", nullable = false)
-    private String title;
+    private Title title;
 
     @Column(name = "AUTHOR", nullable = false)
     private String author;
 
-    @Column(name = "DESCRIPTION", nullable = false)
-    private String desc;
+    @Embedded
+    @Column(name = "CONTENT", nullable = false)
+    private Content content;
 
-    public Article(final String title, final String author, final String desc) {
+    public Article(final Title title, final String author, final Content content) {
         this.title = title;
         this.author = author;
-        this.desc = desc;
+        this.content = content;
+    }
+
+    public String getContentAsString() {
+        return content.getContent();
+    }
+
+    public String getTitleAsString() {
+        return title.getTitle();
     }
 }

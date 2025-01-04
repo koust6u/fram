@@ -1,4 +1,4 @@
-package web.fram.side.article.service;
+package web.fram.side.article.application;
 
 import java.util.List;
 
@@ -6,14 +6,16 @@ import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import web.fram.side.article.application.data.response.ArticleSearchServiceResponse;
 import web.fram.side.article.domain.Article;
 import web.fram.side.article.domain.repository.ArticleRepository;
-import web.fram.side.article.service.data.response.ArticleSearchServiceResponse;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ArticleSearchService {
 
     private static final int PAGE_SIZE = 10;
