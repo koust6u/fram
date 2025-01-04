@@ -1,16 +1,24 @@
 package web.fram.side.article.handler.api;
 
+import static org.hamcrest.Matchers.is;
+
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import web.dummy.ArticleDummies;
 import web.fixture.AcceptanceFixture;
+import web.fram.side.article.domain.Article;
+import web.fram.side.article.domain.repository.ArticleRepository;
 
 class ArticleApiTest extends AcceptanceFixture {
+
+    @Autowired
+    private ArticleRepository articleRepository;
 
     @Test
     @DisplayName("글을 생성한다.")
@@ -74,5 +82,49 @@ class ArticleApiTest extends AcceptanceFixture {
                 .then()
                 .assertThat()
                 .statusCode(400);
+    }
+
+    @Test
+    @DisplayName("작성글 단건 조회한다.")
+    void search_single_article() {
+        // given
+        final Article article = articleRepository.save(ArticleDummies.article());
+
+        // when & then
+        RestAssured
+                .given()
+
+                .when()
+                .pathParam("id", article.getId())
+                .get("/api/article/{id}")
+
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("title", is("제목"))
+                .body("author", is("작성자"))
+                .body("desc", is("내용은 10자이상이여야합니다."));
+    }
+
+    @Test
+    @DisplayName("작성글을 묶음으로 조회한다.")
+    void search_article_by_bunch() {
+        // given
+        create_article();
+        create_article();
+        create_article();
+
+        // when & then
+        RestAssured
+                .given()
+
+                .when().log().all()
+                .pathParam("pageId", 0)
+                .get("/api/article/page/{pageId}")
+
+                .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("size()", is(3));
     }
 }

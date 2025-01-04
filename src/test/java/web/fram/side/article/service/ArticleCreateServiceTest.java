@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import web.dummy.ArticleDummies;
 import web.fram.side.article.domain.repository.ArticleRepository;
-import web.fram.side.article.service.data.ArticleCreateServiceRequest;
+import web.fram.side.article.service.data.request.ArticleCreateServiceRequest;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 class ArticleCreateServiceTest {

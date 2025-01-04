@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import web.fram.side.article.domain.Article;
 import web.fram.side.article.domain.ArticleCreate;
 import web.fram.side.article.domain.repository.ArticleRepository;
-import web.fram.side.article.service.data.ArticleCreateServiceRequest;
+import web.fram.side.article.service.data.request.ArticleCreateServiceRequest;
 
 @Service
 @RequiredArgsConstructor

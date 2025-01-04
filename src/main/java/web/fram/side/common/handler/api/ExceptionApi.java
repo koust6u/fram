@@ -1,5 +1,7 @@
 package web.fram.side.common.handler.api;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.http.HttpStatusCode;
 import org.springframework.validation.FieldError;
 import org.springframework.web.ErrorResponse;
@@ -20,6 +22,12 @@ public class ExceptionApi {
     @ExceptionHandler(IllegalArgumentException.class)
     public ErrorResponse handleIllegalArgumentException(final IllegalArgumentException e) {
         return ErrorResponse.builder(e, HttpStatusCode.valueOf(400), e.getMessage())
+                .build();
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ErrorResponse handleEntityNotFoundException(final EntityNotFoundException e) {
+        return ErrorResponse.builder(e, HttpStatusCode.valueOf(404), e.getMessage())
                 .build();
     }
 }
