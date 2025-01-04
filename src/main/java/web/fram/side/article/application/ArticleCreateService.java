@@ -18,7 +18,7 @@ public class ArticleCreateService {
 
     @Transactional
     public long create(final ArticleCreateAppRequest request) {
-        final ArticleCreator create = new ArticleCreator(request.title(), request.author(), request.decs());
+        final ArticleCreator create = new ArticleCreator(request.title(), request.author(), request.content());
         final Article entity = articleRepository.save(create.toEntity());
         return entity.getId();
     }

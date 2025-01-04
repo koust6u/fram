@@ -46,4 +46,12 @@ public class Article extends BaseTimeEntity {
     public String getTitleAsString() {
         return title.getTitle();
     }
+
+    public void changeTitle(Title title) {
+        this.title = title;
+    }
+
+    public void changeContent(Content content) {
+        this.content = content;
+    }
 }

@@ -42,7 +42,7 @@ class ArticleApiTest extends AcceptanceFixture {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .body(Map.of("author", "작성자 ", "title", "", "desc", "내용"))
+                .body(Map.of("author", "작성자 ", "title", "", "content", "내용"))
 
                 .when()
                 .post("/api/article")
@@ -58,7 +58,7 @@ class ArticleApiTest extends AcceptanceFixture {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .body(Map.of("author", "", "title", "제목", "desc", "내용"))
+                .body(Map.of("author", "", "title", "제목", "content", "내용"))
 
                 .when()
                 .post("/api/article")
@@ -74,7 +74,7 @@ class ArticleApiTest extends AcceptanceFixture {
         RestAssured
                 .given()
                 .contentType(ContentType.JSON)
-                .body(Map.of("author", "작성자", "title", "제목", "desc", ""))
+                .body(Map.of("author", "작성자", "title", "제목", "content", ""))
 
                 .when()
                 .post("/api/article")
@@ -126,5 +126,26 @@ class ArticleApiTest extends AcceptanceFixture {
                 .assertThat()
                 .statusCode(200)
                 .body("size()", is(3));
+    }
+
+    @Test
+    @DisplayName("작성 글을 수정한다.")
+    void modify_article() {
+        // given
+        final Article article = articleRepository.save(ArticleDummies.article());
+
+        // when & then
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .body(ArticleDummies.articleModifyWebRequest())
+
+                .when()
+                .pathParam("id", article.getId())
+                .patch("/api/article/{id}")
+
+                .then()
+                .assertThat()
+                .statusCode(204);
     }
 }
