@@ -148,4 +148,23 @@ class ArticleApiTest extends AcceptanceFixture {
                 .assertThat()
                 .statusCode(204);
     }
+
+    @Test
+    @DisplayName("작성글을 삭제한다.")
+    void delete_article() {
+        // given
+        final Article article = articleRepository.save(ArticleDummies.article());
+
+        // when & then
+        RestAssured
+                .given()
+
+                .when()
+                .pathParam("id", article.getId())
+                .delete("/api/article/{id}")
+
+                .then()
+                .assertThat()
+                .statusCode(204);
+    }
 }
