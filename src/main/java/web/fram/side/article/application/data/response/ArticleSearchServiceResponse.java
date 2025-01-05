@@ -17,7 +17,7 @@ public record ArticleSearchServiceResponse(long id,
                 article.getTitleAsString(),
                 article.getAuthor(),
                 article.getContentAsString(),
-                article.getCreatedAt().truncatedTo(ChronoUnit.MILLIS),
-                article.getUpdatedAt().truncatedTo(ChronoUnit.MILLIS));
+                article.getCreatedAt().truncatedTo(ChronoUnit.SECONDS),
+                article.getUpdatedAt().truncatedTo(ChronoUnit.SECONDS));
     }
 }

@@ -48,8 +48,8 @@ class ArticleSearchServiceTest {
                 article.getTitleAsString(),
                 article.getAuthor(),
                 article.getContentAsString(),
-                article.getCreatedAt().truncatedTo(ChronoUnit.MICROS),
-                article.getUpdatedAt().truncatedTo(ChronoUnit.MICROS));
+                article.getCreatedAt().truncatedTo(ChronoUnit.SECONDS),
+                article.getUpdatedAt().truncatedTo(ChronoUnit.SECONDS));
         assertThat(response).isEqualTo(expected);
     }
 
