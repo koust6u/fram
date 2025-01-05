@@ -118,7 +118,7 @@ class ArticleApiTest extends AcceptanceFixture {
         RestAssured
                 .given()
 
-                .when().log().all()
+                .when()
                 .pathParam("pageId", 0)
                 .get("/api/article/page/{pageId}")
 

@@ -3,6 +3,7 @@ package web.fram.side.article.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -44,9 +45,11 @@ class ArticleSearchServiceTest {
 
         // then
         final ArticleSearchServiceResponse expected = new ArticleSearchServiceResponse(article.getId(),
-                article.getTitleAsString(), article.getAuthor(),
-                article.getContentAsString(), article.getCreatedAt(),
-                article.getUpdatedAt());
+                article.getTitleAsString(),
+                article.getAuthor(),
+                article.getContentAsString(),
+                article.getCreatedAt().truncatedTo(ChronoUnit.MICROS),
+                article.getUpdatedAt().truncatedTo(ChronoUnit.MICROS));
         assertThat(response).isEqualTo(expected);
     }
 
