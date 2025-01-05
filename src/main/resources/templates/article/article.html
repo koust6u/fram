@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>글 보기</title>
+    <link href="/css/article/article.css" rel="stylesheet">
+</head>
+<body>
+<div id="article-container">
+    <div class="article-header">
+        <h1>글 제목</h1>
+    </div>
+    <div id="article-content">
+        <p id="article-date">작성일: </p>
+        <p id="article-modified-date" style="display: none;">수정일: </p> <!-- 수정일을 숨기기 위한 요소 -->
+        <div id="article-body">
+            <p id="article-description">글 내용이 여기에 들어갑니다.</p>
+        </div>
+        <div class="buttons">
+            <button class="modify-button" id="modifyButton">수정</button>
+            <button class="delete-button" id="deleteButton">삭제</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    function getArticleIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');  // 예: /article/edit?id=1
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleString('ko-KR', { // 한국 시간대 및 형식
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false  // 24시간 형식으로 표시
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+        const articleId = getArticleIdFromUrl();
+        try {
+            const response = await fetch(`/api/article/${articleId}`);
+            const data = await response.json();
+
+            if (data) {
+                document.querySelector('h1').textContent = data.title;
+                document.querySelector('#article-date').textContent = `작성일: ${formatDate(data.createdAt)}`;
+                document.querySelector('#article-description').textContent = data.content;
+
+                // 수정일이 작성일과 다르면 수정일을 표시
+                if (data.createdAt !== data.modifiedAt) {
+                    document.querySelector('#article-modified-date').textContent = `수정일: ${formatDate(data.modifiedAt)}`;
+                    document.querySelector('#article-modified-date').style.display = 'block'; // 수정일을 보여줌
+                }
+
+                const modifyButton = document.querySelector('#modifyButton');
+                modifyButton.addEventListener('click', () => {
+                    window.location.href = `/article/edit?id=${articleId}`; // 수정 페이지로 이동
+                });
+
+                const deleteButton = document.querySelector('#deleteButton');
+                deleteButton.addEventListener('click', () => deleteArticle(articleId));
+            }
+        } catch (error) {
+            console.error('글을 불러오는 데 실패했습니다.', error);
+        }
+    });
+
+    async function deleteArticle(id) {
+        const confirmed = confirm("정말 삭제하시겠습니까?");
+        if (confirmed) {
+            try {
+                const response = await fetch(`/api/article/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert("삭제되었습니다.");
+                    window.location.href = '/articles'; // 글 목록 페이지로 이동 (삭제 후)
+                } else {
+                    alert("삭제 실패했습니다.");
+                }
+            } catch (error) {
+                alert("삭제 중 오류가 발생했습니다.");
+            }
+        }
+    }
+</script>
+</body>
+</html>
