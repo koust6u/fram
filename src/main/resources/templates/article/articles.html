@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>글 목록 보기</title>
+    <link href="/css/article/articles.css" rel="stylesheet">
+</head>
+<body>
+
+<div>
+    <h1>글 목록</h1>
+    <div id="article-list">
+        <!-- 글 목록이 여기에 동적으로 표시됩니다. -->
+    </div>
+
+    <div class="page-navigation" id="page-navigation">
+        <!-- 페이지 네비게이션 버튼들이 여기에 표시됩니다. -->
+    </div>
+</div>
+
+<script>
+    let currentPage = 0; // 서버에서 페이지는 0부터 시작
+
+    // 페이지 로딩 시 첫 번째 페이지를 불러옴
+    window.onload = function () {
+        loadArticles(currentPage);
+    };
+
+    async function loadArticles(page) {
+        try {
+            const response = await fetch(`/api/article/page/${page}`);
+            const articles = await response.json();
+
+            // 글 목록 출력
+            const articleListContainer = document.getElementById('article-list');
+            articleListContainer.innerHTML = ''; // 기존 내용 초기화
+
+            if (articles.length === 0) {
+                if (page > 0) {
+                    alert("마지막 페이지입니다.");
+                    return loadArticles(page - 1); // 빈 페이지일 경우, 페이지 이동을 막음
+                }
+            } else {
+                articles.forEach(article => {
+                    const articleItem = document.createElement('div');
+                    articleItem.classList.add('article-item');
+
+                    const title = document.createElement('h2');
+                    title.innerText = article.title;
+                    articleItem.appendChild(title);
+
+                    const contentPreview = document.createElement('p');
+                    contentPreview.innerText = article.content
+                        ? (article.content.length > 700
+                            ? article.content.slice(0, 700) + '...'
+                            : article.content)
+                        : '내용이 없습니다.';
+                    articleItem.appendChild(contentPreview);
+
+                    // 수정하기, 삭제하기, 보기 버튼 추가
+                    const buttonsDiv = document.createElement('div');
+                    buttonsDiv.classList.add('buttons');
+
+                    const viewButton = document.createElement('button');
+                    viewButton.innerText = '보기';
+                    viewButton.classList.add('view-button'); // 클래스 추가
+                    viewButton.onclick = () => viewArticle(article.id);
+                    buttonsDiv.appendChild(viewButton);
+
+                    const modifyButton = document.createElement('button');
+                    modifyButton.innerText = '수정하기';
+                    modifyButton.classList.add('modify-button'); // 클래스 추가
+                    modifyButton.onclick = () => modifyArticle(article.id);
+                    buttonsDiv.appendChild(modifyButton);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerText = '삭제하기';
+                    deleteButton.classList.add('delete-button'); // 클래스 추가
+                    deleteButton.onclick = () => deleteArticle(article.id);
+                    buttonsDiv.appendChild(deleteButton);
+
+                    articleItem.appendChild(buttonsDiv);
+
+                    articleListContainer.appendChild(articleItem);
+                });
+            }
+
+            // 페이지 네비게이션 업데이트
+            updatePagination(page);
+
+        } catch (error) {
+            alert("글 목록을 불러오는 중 오류가 발생했습니다.");
+        }
+    }
+
+    function updatePagination(page) {
+        const pageNavigation = document.getElementById('page-navigation');
+        pageNavigation.innerHTML = '';
+
+        // 페이지 네비게이션 버튼 추가
+        const prevButton = document.createElement('button');
+        prevButton.innerText = '이전';
+        prevButton.disabled = page === 0; // 페이지 0에서 이전 버튼 비활성화
+        prevButton.onclick = () => loadArticles(page - 1);
+        pageNavigation.appendChild(prevButton);
+
+        const pageButton = document.createElement('button');
+        pageButton.innerText = `${page + 1}`; // 서버 페이지는 0부터 시작하지만, 사용자에게는 1부터 표시
+        pageButton.classList.toggle('active', true);
+        pageButton.onclick = () => loadArticles(page);
+        pageNavigation.appendChild(pageButton);
+
+        const nextButton = document.createElement('button');
+        nextButton.innerText = '다음';
+        nextButton.onclick = () => loadArticles(page + 1);
+        pageNavigation.appendChild(nextButton);
+    }
+
+    function viewArticle(id) {
+        alert(`글 ID ${id}를 보기`);
+        // 글 보기 페이지로 이동하거나 세부 정보를 불러오는 로직을 추가할 수 있습니다.
+    }
+
+    function modifyArticle(id) {
+        alert(`글 ID ${id}를 수정`);
+        // 수정 페이지로 이동하거나 수정 API를 호출하는 로직을 추가할 수 있습니다.
+    }
+
+    async function deleteArticle(id) {
+        const confirmed = confirm("정말 삭제하시겠습니까?");
+        if (confirmed) {
+            try {
+                const response = await fetch(`/api/article/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert("삭제되었습니다.");
+                    loadArticles(currentPage); // 삭제 후 현재 페이지 갱신
+                } else {
+                    alert("삭제 실패했습니다.");
+                }
+            } catch (error) {
+                alert("삭제 중 오류가 발생했습니다.");
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

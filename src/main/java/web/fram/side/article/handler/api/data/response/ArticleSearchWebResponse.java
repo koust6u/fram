@@ -2,9 +2,9 @@ package web.fram.side.article.handler.api.data.response;
 
 import web.fram.side.article.application.data.response.ArticleSearchServiceResponse;
 
-public record ArticleSearchWebResponse(long id, String title, String author, String desc) {
+public record ArticleSearchWebResponse(long id, String title, String author, String content) {
 
     public ArticleSearchWebResponse(final ArticleSearchServiceResponse serviceResponse) {
-        this(serviceResponse.id(), serviceResponse.title(), serviceResponse.author(), serviceResponse.description());
+        this(serviceResponse.id(), serviceResponse.title(), serviceResponse.author(), serviceResponse.content());
     }
 }

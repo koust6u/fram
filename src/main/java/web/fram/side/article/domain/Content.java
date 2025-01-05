@@ -3,6 +3,7 @@ package web.fram.side.article.domain;
 import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Lob;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class Content {
     private static final int DESC_MIN_LENGTH = 10;
     private static final int DESC_MAX_LENGTH = 4096;
 
+    @Lob
     private String content;
 
     public Content(final String content) {
