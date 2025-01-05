@@ -67,6 +67,11 @@ jobs:
         run: |
           sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} down
 
+      - name: Delete Dangling docker images
+        run: |
+          sudo docker rmi ${{ secrets.DOCKER_REPO_NAME }}/springboot-app:latest
+        
+
       - name: Start the new environment
         run: |
           sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_YAML_PATH }}/app-docker-compose.yml -p ${{secrets.SERVER_PORT}} up -d
