@@ -1,6 +1,7 @@
 package web.fram.side.article.application.data.response;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import web.fram.side.article.domain.Article;
 
@@ -16,7 +17,7 @@ public record ArticleSearchServiceResponse(long id,
                 article.getTitleAsString(),
                 article.getAuthor(),
                 article.getContentAsString(),
-                article.getCreatedAt(),
-                article.getUpdatedAt());
+                article.getCreatedAt().truncatedTo(ChronoUnit.MILLIS),
+                article.getUpdatedAt().truncatedTo(ChronoUnit.MILLIS));
     }
 }

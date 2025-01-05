@@ -122,7 +122,7 @@ class ArticleApiTest extends AcceptanceFixture {
                 .pathParam("pageId", 0)
                 .get("/api/article/page/{pageId}")
 
-                .then().log().all()
+                .then()
                 .assertThat()
                 .statusCode(200)
                 .body("size()", is(3));
