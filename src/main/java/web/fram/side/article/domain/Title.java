@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Title {
 
     private static final int TITLE_MIN_LENGTH = 2;
-    private static final int TITLE_MAX_LENGTH = 100;
+    private static final int TITLE_MAX_LENGTH = 200;
 
     private String title;
 

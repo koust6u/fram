@@ -165,6 +165,24 @@ button:hover {
     font-style: italic; /* 이태릭체로 설정 */
 }
 
+.create-button {
+    background-color: #28a745; /* 초록색 배경 */
+    color: white;
+    font-size: 1em;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto; /* 버튼을 가운데 정렬 */
+    width: 200px; /* 버튼의 너비 설정 */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #218838; /* 마우스 올렸을 때 색상 변경 */
+}
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     #article-list {
@@ -176,5 +194,9 @@ button:hover {
         width: 100%; /* 작은 화면에서는 한 줄에 하나씩 표시 */
         height: auto; /* 작은 화면에서는 높이를 자동으로 조정 */
         margin-bottom: 20px; /* 카드 간 간격 추가 */
+    }
+
+    .create-button {
+        width: 150px; /* 작은 화면에서는 버튼 크기 줄임 */
     }
 }

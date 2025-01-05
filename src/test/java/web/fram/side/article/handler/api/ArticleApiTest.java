@@ -103,7 +103,7 @@ class ArticleApiTest extends AcceptanceFixture {
                 .statusCode(200)
                 .body("title", is("제목"))
                 .body("author", is("작성자"))
-                .body("desc", is("내용은 10자이상이여야합니다."));
+                .body("content", is("내용은 10자이상이여야합니다."));
     }
 
     @Test

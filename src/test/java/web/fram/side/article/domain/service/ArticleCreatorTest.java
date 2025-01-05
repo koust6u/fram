@@ -61,10 +61,10 @@ class ArticleCreatorTest {
     }
 
     @Test
-    @DisplayName("제목이 100자 초과하면 에외를 던진다.")
+    @DisplayName("제목이 200자 초과하면 에외를 던진다.")
     void throw_exception_when_title_length_greater_then_10() {
         // given
-        final String title = "1".repeat(101);
+        final String title = "1".repeat(201);
         final String content = "가나다라마바사아자차가파타";
         final String author = "프람";
 

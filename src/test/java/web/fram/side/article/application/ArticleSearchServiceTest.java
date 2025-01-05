@@ -43,8 +43,10 @@ class ArticleSearchServiceTest {
         final ArticleSearchServiceResponse response = articleSearchService.searchSingle(article.getId());
 
         // then
-        final ArticleSearchServiceResponse expected = new ArticleSearchServiceResponse
-                (article.getId(), article.getTitleAsString(), article.getAuthor(), article.getContentAsString());
+        final ArticleSearchServiceResponse expected = new ArticleSearchServiceResponse(article.getId(),
+                article.getTitleAsString(), article.getAuthor(),
+                article.getContentAsString(), article.getCreatedAt(),
+                article.getUpdatedAt());
         assertThat(response).isEqualTo(expected);
     }
 

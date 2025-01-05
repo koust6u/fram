@@ -22,7 +22,7 @@ class TitleTest {
     @DisplayName("제목이 100자 초과하면 에외를 던진다.")
     void throw_exception_when_title_length_greater_then_10() {
         // given
-        final String title = "1".repeat(101);
+        final String title = "1".repeat(201);
 
         // when
         assertThatThrownBy(() -> new Title(title))
