@@ -52,11 +52,17 @@
 
                     const contentPreview = document.createElement('p');
                     contentPreview.innerText = article.content
-                        ? (article.content.length > 700
-                            ? article.content.slice(0, 700) + '...'
+                        ? (article.content.length > 300
+                            ? article.content.slice(0, 300) + '...'
                             : article.content)
                         : '내용이 없습니다.';
                     articleItem.appendChild(contentPreview);
+
+                    // 작성일 추가
+                    const createdAt = document.createElement('p');
+                    createdAt.innerText = `작성일: ${new Date(article.createdAt).toLocaleDateString('ko-KR')}`;
+                    createdAt.classList.add('created-at');
+                    articleItem.appendChild(createdAt);
 
                     // 수정하기, 삭제하기, 보기 버튼 추가
                     const buttonsDiv = document.createElement('div');
@@ -118,13 +124,11 @@
     }
 
     function viewArticle(id) {
-        alert(`글 ID ${id}를 보기`);
-        // 글 보기 페이지로 이동하거나 세부 정보를 불러오는 로직을 추가할 수 있습니다.
+        window.location.href = `/article/view?id=${id}`;
     }
 
     function modifyArticle(id) {
-        alert(`글 ID ${id}를 수정`);
-        // 수정 페이지로 이동하거나 수정 API를 호출하는 로직을 추가할 수 있습니다.
+        window.location.href = `/article/edit?id=${id}`;
     }
 
     async function deleteArticle(id) {

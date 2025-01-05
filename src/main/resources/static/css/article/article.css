@@ -1,0 +1,130 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* 밝은 회색 배경 */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 2em; /* 제목 크기 조정 */
+}
+
+#article-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    margin: 0;
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.back-button:hover {
+    opacity: 0.8;
+}
+
+#article-content {
+    margin-top: 20px;
+}
+
+#article-date {
+    font-size: 1.1em;
+    color: #7f8c8d; /* 기본적으로 회색 */
+}
+
+#article-modified-date {
+    font-size: 1.1em;
+    color: #ffffff; /* 수정일은 하얀색 */
+    background-color: #34495e; /* 어두운 배경 */
+    padding: 5px;
+    border-radius: 3px;
+}
+
+#article-body {
+    margin-top: 20px;
+}
+
+#article-description {
+    color: #333; /* 글 내용은 검은색 */
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.modify-button {
+    background-color: #f39c12; /* 수정 버튼은 주황색 */
+    color: white;
+}
+
+.delete-button {
+    background-color: #e74c3c; /* 삭제 버튼은 빨간색 */
+    color: white;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    #article-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    #article-date {
+        font-size: 1em;
+    }
+
+    #article-description {
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+}

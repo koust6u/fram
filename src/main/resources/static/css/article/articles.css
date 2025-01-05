@@ -25,28 +25,62 @@ h1 {
 }
 
 .article-item {
+    display: flex;
     width: 100%; /* 카드 너비 */
     max-width: 450px; /* 각 카드의 최대 너비 설정 */
     height: 200px; /* 카드의 높이를 220px로 줄임 */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
-    background-color: #fff; /* 흰 배경 */
-    transition: transform 0.3s, box-shadow 0.3s ease-in-out; /* 부드러운 애니메이션 */
-    display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff; /* 흰 배경 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
     justify-content: space-between;
-    overflow: hidden;
-    word-wrap: break-word;
-    margin: 0 auto; /* 카드 간 간격 */
-    position: relative; /* 겹치기 위해 상대적 위치 설정 */
-    z-index: 1; /* 기본 카드 z-index 설정 */
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s ease-in-out; /* 부드러운 애니메이션 */
+    border-bottom: 1px solid #eee;
 }
 
+.article-item h2 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.article-item p {
+    font-size: 0.95em;
+    color: #7f8c8d;
+    line-height: 1.5;
+    margin: 0;
+    overflow: visible;  /* 내용이 잘리지 않도록 설정 */
+    word-wrap: break-word;  /* 단어가 길면 줄바꿈되도록 설정 */
+    -webkit-line-clamp: 3; /* 텍스트를 3줄로 제한 */
+    -webkit-box-orient: vertical;
+}
+
+.created-at {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-top: 5px;
+    text-align: right;
+}
 
 .article-item:hover {
-    transform: translateY(-5px); /* 호버 시 위로 올라가는 효과 */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.article-item .content-wrapper p {
+    white-space: normal;  /* 내용이 길어져도 여러 줄로 표시되도록 설정 */
+}
+
+.article-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .article-item h2 {
@@ -87,17 +121,17 @@ button:hover {
 }
 
 .view-button {
-    background-color: #007bff;
+    background-color: #4a90e2;
     color: white;
 }
 
 .modify-button {
-    background-color: #6c757d;
+    background-color: #7f8c8d;
     color: white;
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: #e74c3c;
     color: white;
 }
 
@@ -113,14 +147,22 @@ button:hover {
     font-size: 0.9em;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #4a90e2;
     color: white;
     cursor: pointer;
 }
 
 .page-navigation button:disabled {
-    background-color: #6c757d;
+    background-color: #7f8c8d;
     cursor: not-allowed;
+}
+
+/* 스타일 추가 */
+.created-at {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin-top: 5px;
+    font-style: italic; /* 이태릭체로 설정 */
 }
 
 /* 반응형 디자인 */
